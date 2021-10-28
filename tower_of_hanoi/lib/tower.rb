@@ -5,20 +5,25 @@ class Tower
   end
 
   def move!(from = "A", to = "C", extra = "B")
-    move_single("A", "B")
-    move_single("A", "C")
-    move_single("B", "C")
-    move_single("A", "B")
-    move_single("C", "A")
-    move_single("C", "B")
-    move_single("A", "B")
-    move_single("B", "C")
-    move_single("B", "A")
-    move_single("C", "A")
-    move_single("B", "C")
-    move_single("A", "B")
-    move_single("A", "C")
-    move_single("B", "C")
+    if @posts["A"].length == 1
+      move_single(from, extra)
+      move_single(extra, to)
+    elsif @posts["A"].length == 3
+      move_single(from, extra)
+      move_single(from, to)
+      move_single(extra, to)
+      move_single(from, extra)
+      move_single(to, from)
+      move_single(to, extra)
+      move_single(from, extra)
+      move_single(extra, to)
+      move_single(extra, from)
+      move_single(to, from)
+      move_single(extra, to)
+      move_single(from, extra)
+      move_single(from, to)
+      move_single(extra, to)
+    end
   end
 
   def move_single(from, to)
