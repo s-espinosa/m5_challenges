@@ -8,6 +8,10 @@ class Tower
     if @posts["A"].length == 1
       move_single(from, extra)
       move_single(extra, to)
+    elsif @posts["A"].lenght == 2
+      move_single(from, extra)
+      move_single(from, to)
+      move_single(extra, to)
     elsif @posts["A"].length == 3
       move_single(from, extra)
       move_single(from, to)
