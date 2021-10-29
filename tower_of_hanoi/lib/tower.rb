@@ -11,19 +11,15 @@ class Tower
     goal_length = goal.length
 
     until @posts[to][-goal_length..-1] == goal
-      if @posts[from].last != nil && (@posts[extra].last == nil || @posts[from].last < @posts[extra].last)
-        to_move = @posts[from].pop
-        @posts[extra].push(to_move)
-      elsif @posts[from].last != nil && (@posts[to].last == nil || @posts[from].last < @posts[to].last)
-        to_move = @posts[from].pop
-        @posts[to].push(to_move)
-      elsif @posts[extra].last != nil && (@posts[to].last == nil || @posts[extra].last < @posts[to].last)
-        to_move = @posts[extra].pop
-        @posts[to].push(to_move)
+      if can_move?(from, extra)
+        move_single(from, extra)
+      elsif can_move?(from, to)
+        move_single(from, to)
+      elsif can_move?(extra, to)
+        move_single(extra, to)
       else
         move!(to, from, extra)
-        to_move = @posts[extra].pop
-        @posts[to].push(to_move)
+        move_single(extra, to)
       end
     end
   end
@@ -31,6 +27,14 @@ class Tower
   def move_single(from, to)
     to_move = @posts[from].pop
     @posts[to].push(to_move)
+  end
+
+  def can_move?(from, to)
+    @posts[from].last != nil &&
+      (
+        @posts[to].last == nil ||
+        @posts[from].last < @posts[to].last
+      )
   end
 
   def identify_goal(sorted_array)

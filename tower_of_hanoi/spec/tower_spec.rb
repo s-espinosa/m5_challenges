@@ -50,6 +50,20 @@ describe Tower do
 
     expect(tower.identify_goal(input)).to eq(output)
   end
+
+  it 'can determine if discs can move between posts' do
+    tower = Tower.new({"A" => [4, 1], "B" => [2], "C" => []})
+
+    expect(tower.can_move?("A", "B")).to be(true)
+    expect(tower.can_move?("A", "C")).to be(true)
+    expect(tower.can_move?("B", "C")).to be(true)
+    expect(tower.can_move?("B", "A")).to be(false)
+    expect(tower.can_move?("C", "A")).to be(false)
+
+    tower.move_single("A", "C")
+
+    expect(tower.can_move?("C", "A")).to be(true)
+  end
 end
 
 
