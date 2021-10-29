@@ -24,6 +24,7 @@ class Tower
     end
   end
 
+  private
   def move_single(from, to)
     to_move = @posts[from].pop
     @posts[to].push(to_move)
